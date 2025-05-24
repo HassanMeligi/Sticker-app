@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { StickerService } from '../../services/sticker.service';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-create-sticker',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './create-sticker.component.html'
 })
 export class CreateStickerComponent {

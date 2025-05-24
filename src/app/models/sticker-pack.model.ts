@@ -16,7 +16,7 @@ export interface StickerPackDto {
 
 export interface StickerCreateModel {
   imageFile: File | null;
-  emojis: string[];
+  emojis: string[] | string;  // ✅ Allow both string[] and string
 }
 
 export interface StickerPackCreateModel {
