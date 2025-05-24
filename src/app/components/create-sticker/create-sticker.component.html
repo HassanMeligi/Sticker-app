@@ -1,0 +1,19 @@
+<form [formGroup]="stickerForm" (ngSubmit)="submit()">
+  <input formControlName="identifier" placeholder="Identifier">
+  <input formControlName="name" placeholder="Name">
+  <input formControlName="publisher" placeholder="Publisher">
+  <input type="file" (change)="onTrayImageChange($event)">
+  <input formControlName="publisherWebsite" placeholder="Publisher Website">
+  <input formControlName="privacyPolicyWebsite" placeholder="Privacy Policy Website">
+  <input formControlName="licenseAgreementWebsite" placeholder="License Agreement Website">
+
+  <div formArrayName="stickers">
+    <div *ngFor="let sticker of stickers.controls; let i = index" [formGroupName]="i">
+      <input type="file" (change)="onStickerImageChange(i, $event)">
+      <input formControlName="emojis" placeholder="Emojis (comma separated)">
+    </div>
+  </div>
+
+  <button type="button" (click)="addSticker()">Add Sticker</button>
+  <button type="submit">Submit</button>
+</form>
