@@ -4,5 +4,6 @@ import { StickerCreateComponent } from './components/sticker-create/sticker-crea
 
 export const routes: Routes = [
   { path: '', component: StickerListComponent },
-  { path: 'create', component: StickerCreateComponent }
+  { path: 'create', component: StickerCreateComponent },
+  { path: 'create/:id', component: StickerCreateComponent }  // Update mode
 ];

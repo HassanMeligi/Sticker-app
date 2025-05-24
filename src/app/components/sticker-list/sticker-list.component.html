@@ -1,1 +1,79 @@
-<p>sticker-list works!</p>
+<!-- sticker-list.component.html -->
+<div class="sticker-pack-container">
+  <div class="header-section">
+    <h1>My Sticker Packs</h1>
+    <button mat-raised-button color="primary" (click)="createNewPack()">
+      <mat-icon>add</mat-icon>
+      Create New Pack
+    </button>
+  </div>
+
+  <div class="search-filter-section">
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search packs..." [(ngModel)]="searchQuery" (input)="applyFilter()">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Sort by</mat-label>
+      <mat-select [(value)]="sortOption" (selectionChange)="applyFilter()">
+        <mat-option value="name-asc">Name (A-Z)</mat-option>
+        <mat-option value="name-desc">Name (Z-A)</mat-option>
+        <mat-option value="date-newest">Newest first</mat-option>
+        <mat-option value="date-oldest">Oldest first</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="filteredPacks.length > 0; else emptyState" class="pack-grid">
+    <mat-card *ngFor="let pack of filteredPacks" class="pack-card" (click)="editStickerPack(pack.id)">
+      <div class="card-image-container">
+        <img [src]="pack.trayImageUrl || 'assets/default-sticker-pack.png'" alt="{{pack.name}}">
+        <div class="card-badge" *ngIf="pack.stickersCount">
+          <mat-icon>sticky_note_2</mat-icon>
+          <span>{{pack.stickersCount}} stickers</span>
+        </div>
+      </div>
+      
+      <mat-card-content>
+        <h3 class="pack-name">{{ pack.name }}</h3>
+        <p class="pack-publisher">{{ pack.publisher }}</p>
+        
+        <div class="pack-meta">
+          <span class="meta-item">
+            <mat-icon>calendar_today</mat-icon>
+            {{ pack.createdAt | date:'mediumDate' }}
+          </span>
+          <span class="meta-item" *ngIf="pack.downloadCount">
+            <mat-icon>download</mat-icon>
+            {{ pack.downloadCount | number }}
+          </span>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-icon-button (click)="$event.stopPropagation(); sharePack(pack)">
+          <mat-icon>share</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="$event.stopPropagation(); confirmDelete(pack)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <img src="assets/empty-sticker-packs.svg" alt="No sticker packs">
+      <h3>No Sticker Packs Found</h3>
+      <p *ngIf="searchQuery">No packs match your search "{{searchQuery}}"</p>
+      <p *ngIf="!searchQuery">You haven't created any sticker packs yet</p>
+      <button mat-raised-button color="primary" (click)="createNewPack()">
+        Create Your First Pack
+      </button>
+    </div>
+  </ng-template>
+
+  <router-outlet></router-outlet>
+</div>

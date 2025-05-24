@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class StickerService {
-  private apiUrl = 'https://localhost:7035/api/Sticker';  // Adjust your URL
+  private apiUrl = 'http://localhost:5286/api/Sticker';  // ✅ Use http for local dev
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +18,14 @@ export class StickerService {
 
   createStickerPack(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/Create`, formData);
+  }
+
+  updateStickerPack(id: number, formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Update`, formData, { params: new HttpParams().set('id', id.toString()) });
+  }
+
+  deleteStickerPack(id: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/Delete`, null, { params: new HttpParams().set('id', id.toString()) });
   }
 
   buildFormData(model: any): FormData {

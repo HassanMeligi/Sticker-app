@@ -1,0 +1,177 @@
+/* sticker-pack-list.component.scss */
+.sticker-pack-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.search-filter-section {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  mat-form-field {
+    width: 250px;
+  }
+}
+
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.pack-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-image-container {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 16px;
+    }
+
+    .card-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+
+  mat-card-content {
+    flex: 1;
+
+    .pack-name {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 8px 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pack-publisher {
+      color: #666;
+      margin: 0 0 12px;
+      font-size: 14px;
+    }
+
+    .pack-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: #666;
+        font-size: 12px;
+
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  mat-card-actions {
+    padding: 8px !important;
+    margin-top: auto;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+
+  img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  p {
+    color: #666;
+    margin: 0 0 16px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .search-filter-section {
+    flex-direction: column;
+    gap: 16px;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .pack-grid {
+    grid-template-columns: 1fr;
+  }
+}
