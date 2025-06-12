@@ -1,0 +1,20 @@
+<mat-card *ngIf="stickerPack">
+  <mat-card-title>{{ stickerPack.name }}</mat-card-title>
+  <mat-card-subtitle>Publisher: {{ stickerPack.publisher }}</mat-card-subtitle>
+  <p>Identifier: {{ stickerPack.identifier }}</p>
+  <p>Publisher Website: {{ stickerPack.publisherWebsite }}</p>
+  <p>Privacy Policy: {{ stickerPack.privacyPolicyWebsite }}</p>
+  <p>License Agreement: {{ stickerPack.licenseAgreementWebsite }}</p>
+
+  <h3>Stickers</h3>
+  <ul>
+    <li *ngFor="let sticker of stickerPack.stickers">
+      {{ sticker.emojis.join(', ') }}
+      <br>
+      <img [src]="sticker.imageFile" alt="Sticker Image" width="100">
+    </li>
+  </ul>
+
+  <button mat-raised-button color="primary" (click)="updateStickerPack()">Update</button>
+  <button mat-raised-button color="warn" (click)="deleteStickerPack()">Delete</button>
+</mat-card>
